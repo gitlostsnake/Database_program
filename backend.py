@@ -23,15 +23,8 @@ def view():
     cur = conn.cursor()
     cur.execute("SELECT * FROM road_works")
     rows=cur.fetchall()
-    conn.commit()
     conn.close()
     return rows
 
 
 connect()
-
-testing by...
-insert("Newcastle", "martins", 230219, 200)
-print(view())
-
-### getting errors on line 33, 16. sqlite3.OperationalError no such column: location.
