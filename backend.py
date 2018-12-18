@@ -12,8 +12,8 @@ def connect():
 def insert(location, client, startdate, length):
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
-    cur.execute("""INSERT INTO road_works VALUES (NULL, ?, ? ,? ,?),
-                (location, client, startdate, length)""")
+    cur.execute("INSERT INTO road_works VALUES (NULL, ?, ? ,? ,?)",
+                (location, client, startdate, length))
     conn.commit()
     conn.close()
 
