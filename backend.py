@@ -26,7 +26,7 @@ def view():
     conn.close()
     return rows
 
-# search function
+### search function
 def search(location="", client="", startdate="", length=""):
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
@@ -36,7 +36,7 @@ def search(location="", client="", startdate="", length=""):
     conn.close()
     return rows
 
-# delete road works
+### delete road works
 def delete(id):
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
@@ -44,6 +44,14 @@ def delete(id):
     conn.commit()
     conn.close()
 
+### Update arguments and edit the jobs in the database
+def update(id, location, client, startdate, length):
+    conn = sqlite3.connect("road_works.db")
+    cur = conn.cursor()
+    cur.execute("UPDATE road_works SET location=?, client=?, startdate=?, length=? WHERE id=?",
+                (location, client, startdate, length, id))
+    conn.commit()
+    conn.close()
 
 connect()
 
