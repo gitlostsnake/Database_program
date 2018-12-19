@@ -1,5 +1,13 @@
 from tkinter import *
-import backend.py
+import backend
+
+# This is so the backend data can be seen in the display box
+def view_roadworks():
+    # Deleteing from index 0 to the end so we dont duplicate items on dispay
+    list1.delete(0, END)
+    for row in backend.view():
+        list1.insert(END, row)
+
 
 #### Main
 window=Tk()
@@ -18,7 +26,8 @@ remove_stk_b.grid(row=3, column=0)
 
 
 #### Road works Buttons on the right side
-view_wrks_b = Button(window, text= "View Road Works", width=12)
+view_wrks_b = Button(window, text= "View Road Works", width=12,
+                    command=view_roadworks)
 view_wrks_b.grid(row=1, column=6)
 
 new_r_wrks_b = Button(window, text= "New Road Works", width=12)
