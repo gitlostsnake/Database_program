@@ -120,7 +120,7 @@ sb1.configure(command = list1.yview)
 ### data entry to use add roadworks using labels instead of buttons
 ### so we can rig all of them up to the "Add to database" button
 HEYlisten_ADD = Label(window, text="""
-                        Fill in the fields, press ADD makes a new entry in road_works.db""")
+                        Fill in the fields, press CREATE for a new entry""")
 HEYlisten_ADD.grid(row=16 , column= 0, columnspan = 4)
 
 
@@ -164,7 +164,7 @@ Update_Database.grid(row = 18, column = 4)
 
 ###
 HEYlisten_UPDATE = Label(window, text=
-        "EDIT the fields and press the Update button to edit the selected")
+        "Or press the Update button to change info")
 HEYlisten_UPDATE.grid(row = 19, column = 0, columnspan = 4)
 
 window.mainloop()
