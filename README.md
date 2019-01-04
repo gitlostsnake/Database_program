@@ -2,15 +2,27 @@
 
 This programs main goal is to create a database of road works for a traffic management company and to keep track of stock being used.
 
-1. database for road works (set up completed) 
-to do;
-  dates are currently set up as a interger and that needs to be changed look up dates and times in Python essential reference
+1. database for road works (set up completed)
+      ~ info taken
+      ~ Location {stored as text ATM}, Client, Start Date, End Date
   
- 2. database for all items currently in stock (not complete)
+2. database for all items currently in stock (backend_stock.py)
+      ~ info needed for database
+      ~ Item Name, Item amount, Warning level(ie 15% send a warning), {optional} Price
  
- 3. Job calculator will ask a few questions about the new job and will give a rough estimate of how much stock will be used. Then it will
- minus it from the stock database (temporarily) shown as 60/100 available.
- 
- 4. When adding a new job to the database it will ask for the information required to calculate it.
+3. Expand the database for road works to take more info such as
+      ~ Length in Km {used to calculate cones needed}, 
+      ~ Static or Temporary by nature {Doubled at 18m and lamped at 18m cone spacing 9m},
+      ~ Breaks in the mainline {How many slip roads will the job cover? This will require attention}
+      ~ Cost per day {Optional}
+      ~ Hwm Men required 
+      ~ Total average workmen including 3rd parties. {Optional}
+      
+4. Make calculations with the information collected by the database
+      ~ Count down to time left on a job and send out reminders/warnings
+      ~ Job percentage completed on time NO delays
+      ~ Job cancelations and reasons why
+      
+5. When adding a new job to the database it will ask for the information required to calculate approx item useage.
  
  
