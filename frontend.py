@@ -1,7 +1,8 @@
 from tkinter import *
 import backend_roadworks
 import backend_inventory
-
+import backend_vehicles
+from tkinter import messagebox
 # This is my first program and I look forward to your feedback.
 
 # CONTENTS
@@ -56,11 +57,17 @@ def view_roadworks():
     for row in backend_roadworks.view():
         list1.insert(END, row) # END means every new row is added at the end
 
+
 ### Displays Stock items from inventory DB and displays them on seperate listbox
 def view_inventory():
     stocklist.delete(0, END)
     for row in backend_inventory.view():
         stocklist.insert(END, row)
+
+def ViewVehicles():
+    VehicleList.delete(0, END)
+    for row in backend_vehicles.view():
+        VehicleList.insert(END, row)
 
 
 ### Currently only searches location column
@@ -69,6 +76,7 @@ def search_roadworks():
     for row in backend_roadworks.search(search_text.get()):
         list1.insert(END, row)
 
+
 ###
 def delete_roadworks():
     backend_roadworks.delete(selected_roadworks[0])
@@ -76,11 +84,14 @@ def delete_roadworks():
     for row in backend_roadworks.view():
         list1.insert(END, row)
 
+
+
 def delete_inventory():
     backend_inventory.delete(selected_item[0])
     stocklist.delete(0, END)
     for row in backend_inventory.view():
         stocklist.insert(END, row)
+
 
 ### Adds info in the Entry boxes to the database
 def Add_To_Roadworks():
@@ -120,6 +131,10 @@ def Update_Inventory():
         stocklist.insert(END, row)
 
 
+def Message2_User():
+    messagebox.showinfo("Advice", "Tough")
+
+
 ### Main
 window=Tk()
 window.title("TM Organiser")
@@ -153,7 +168,7 @@ Delete_Roadworks_Button = Button(window, text= "Del Road Works", width=14,
                 command = delete_roadworks)
 Delete_Roadworks_Button.grid(row= 6, column = 0)
 
-Create_Roadworks_Button = Button(window, text= "Create New Entry", width=14,
+Create_Roadworks_Button = Button(window, text= "Create Job Entry", width=14,
                             command = Add_To_Roadworks)
 Create_Roadworks_Button.grid(row = 17, column = 4)
 
@@ -161,10 +176,14 @@ Print_Out_Button = Button(window, text= "Print Details", width = 14)
 Print_Out_Button.grid(row=15, column= 0)
 
 ### PLUS Data Update using the same boxes as add to database.
-Update_RDatabaseButton = Button(window, text= "Update Entry", width=14,
+Update_RDatabaseButton = Button(window, text= "Update Job", width=14,
                             command = Update_Roadworks)
 Update_RDatabaseButton.grid(row = 18, column = 4)
 
+# Vehicle Buttons
+ViewVehicles_Button = Button(window, text= "View Vehicles", width =14,
+                        command = ViewVehicles)
+ViewVehicles_Button.grid(row=41, column=0)
 
 # This button will be used for adding inventory items to the road works
 # using start date and end date you can give a stock forcast to see what
@@ -210,7 +229,7 @@ sb1.configure(command = list1.yview)
 Stock_list_label = Label(window, text="")
 Stock_list_label.grid(row=22 , column=2)
 
-stocklist = Listbox(window, height=12, width = 70)
+stocklist = Listbox(window, height=5, width = 70)
 stocklist.grid(row=23, column=1, rowspan = 15, columnspan = 15)
 
 CREATED_By_Jesus = Label(window, text= "+")
@@ -224,6 +243,9 @@ sb2.configure(command = stocklist.yview)
 
 stocklist.bind('<<ListboxSelect>>', get_selected_item)
 
+### 4c. MAINVIEW BOX FOR VEHICLES
+VehicleList = Listbox(window, height=5, width=70)
+VehicleList.grid(row=41, column =1, rowspan = 15, columnspan =15)
 
 ### 5a. DATAFIELDS AND ENTRY BOXES
 # data entry to use add roadworks using labels instead of buttons
@@ -310,8 +332,9 @@ ITEM_Warning_Entry.grid(row=21, column=3)
 ## Additional_Data = Label(window, text="ADDITIONAL DATA")
 ## Additional_Data.grid(row = 20, column = 2)
 
-# Help_Button = Button(window, text="Need help?", width=14)
-# Help_Button.grid(row = 19, column = 0)
+Help_Button = Button(window, text="Need help?", width=14,
+                    command = Message2_User)
+Help_Button.grid(row = 19, column = 0)
 
 ## Length_KM = Label(window, text="Length(km)")
 ## Length_KM.grid(row = 21, column = 0)
