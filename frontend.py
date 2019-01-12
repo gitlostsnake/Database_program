@@ -50,6 +50,14 @@ def get_selected_item(event):
     return(selected_item)
 
 
+def get_selected_vehicle(event):
+    global selected_vehicle
+    index = VehicleList.curselection()[0]
+    selected_vehicle = VehicleList.get(index)
+    return(selected_vehicle)
+
+
+
 ### FUNCTIONS for buttons
 def view_roadworks():
     # Deleteing from index 0 to the end so we dont duplicate items on dispay
@@ -135,6 +143,9 @@ def Message2_User():
     messagebox.showinfo("Advice", "Tough")
 
 
+def AssignVehicle():
+    pass
+
 ### Main
 window=Tk()
 window.title("TM Organiser")
@@ -185,12 +196,15 @@ ViewVehicles_Button = Button(window, text= "View Vehicles", width =14,
                         command = ViewVehicles)
 ViewVehicles_Button.grid(row=41, column=0)
 
+AssignVehicles_Button = Button(window, text="Assign Vehicle", width= 14,
+                        command = AssignVehicle)
+AssignVehicles_Button.grid(row =13, column=0)
 # This button will be used for adding inventory items to the road works
 # using start date and end date you can give a stock forcast to see what
 # inventory will look like 5 months from now and when your going to struggle
 # CREATE TABLE in ROADWORKS selected_Roadworks[] + selected_item[]
-ItemsToRoadworksBUTTON = Button(window, text = "Assign Stock", width=14)
-ItemsToRoadworksBUTTON.grid(row = 14, column = 0)
+AssignStock_Button = Button(window, text = "Assign Stock", width=14)
+AssignStock_Button.grid(row = 14, column = 0)
 
 
 
@@ -215,7 +229,7 @@ list1 = Listbox(window, height=12,width=70)
 list1.grid(row =1, column =1, rowspan = 15, columnspan = 15)
 
 sb1= Scrollbar(window)
-sb1.grid(row=3 ,column=16, rowspan = 4)
+# sb1.grid(row=3 ,column=16, rowspan = 4)
 
 list1.bind('<<ListboxSelect>>', get_selected_roadwork)
 
@@ -236,7 +250,7 @@ CREATED_By_Jesus = Label(window, text= "+")
 CREATED_By_Jesus.grid(row =40, column= 0)
 
 sb2 = Scrollbar(window)
-sb2.grid(row=25, column=16, rowspan = 4)
+# sb2.grid(row=25, column=16, rowspan = 4)
 
 stocklist.configure(yscrollcommand =sb2.set)
 sb2.configure(command = stocklist.yview)
@@ -246,6 +260,16 @@ stocklist.bind('<<ListboxSelect>>', get_selected_item)
 ### 4c. MAINVIEW BOX FOR VEHICLES
 VehicleList = Listbox(window, height=5, width=70)
 VehicleList.grid(row=41, column =1, rowspan = 15, columnspan =15)
+
+VehicleList.bind('<<ListboxSelect>>', get_selected_vehicle)
+
+
+### 4d. ITEM/JOB RELATION VIEWBOX
+AssignedWorks_Label = Label(window, text="Assigned")
+AssignedWorks_Label.grid(row=0 ,column =16)
+
+AssignedWorks = Listbox(window, height= 12, width= 35)
+AssignedWorks.grid(row= 1, column= 16, rowspan= 15, columnspan=15)
 
 ### 5a. DATAFIELDS AND ENTRY BOXES
 # data entry to use add roadworks using labels instead of buttons
