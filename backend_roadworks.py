@@ -4,12 +4,14 @@ from datetime import datetime
 
 # date_format = '%Y-%m-%d %H:%M'
 
-### Date and time is set as integer and needs to be changed to datetime
-### The length will be another date and will do something like
-### startdate - endtime = duration_of_roadworks
-### Location will be changed eventually from text to OM image or RW drawing
+# Date and time is set as integer and needs to be changed to datetime
+# The length will be another date and will do something like
+# start_date - end_time = duration_of_roadworks
+# Location will be changed eventually from text to OM image or RW drawing
 
-### Connect to the sql database
+# Connect to the sql database
+
+
 def connect():
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
@@ -19,7 +21,9 @@ def connect():
     conn.close()
 
 
-### Add new roadworks + changes date strings into datetime objects
+# Add new roadworks + changes date strings into datetime objects
+
+
 def insert(location, client, start_date, end_date):
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
@@ -30,7 +34,8 @@ def insert(location, client, start_date, end_date):
     conn.commit()
     conn.close()
 
-### view road works
+
+# view road works
 def view():
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
@@ -51,6 +56,7 @@ def search(location="", client="", start_date="", end_date=""):
     conn.close()
     return rows
 
+
 # delete road works
 def delete(id):
     conn = sqlite3.connect("road_works.db")
@@ -59,7 +65,8 @@ def delete(id):
     conn.commit()
     conn.close()
 
-### Update arguments and edit the jobs in the database
+
+# Update arguments and edit the jobs in the database
 def update(id, location, client, start_date, end_date):
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
@@ -69,12 +76,12 @@ def update(id, location, client, start_date, end_date):
     conn.commit()
     conn.close()
 
-### Going to do some calculations with the start and end date and return it
-### as a row
-def timeleft(start_date, end_date):
-    conn = sqlite3.connect("road_works.db")
-    cur = conn.cursor()
-    cur.execute()
+# Going to do some calculations with the start and end date and return it
+# as a row
+# def timeleft(start_date, end_date):
+#     conn = sqlite3.connect("road_works.db")
+#     cur = conn.cursor()
+#     cur.execute()
 
 # test datetime object
 # print("")
@@ -85,7 +92,7 @@ def timeleft(start_date, end_date):
 
 
 connect()
-### Test buttons
+# Test buttons
 # update(4, "Penrith", "HW Martins", 200719, 25)
 # insert("A19", "Martins", "2019-02-01 20:00", "2019-03-01 06:00")
 # insert("A66", "Penrtith Council", "2019-3-15 06:00", "2019-03-20 15:00")
@@ -100,6 +107,6 @@ connect()
 # print("All done")
 
 
-### Testing turning start_date into a datetime object.
+# Testing turning start_date into a datetime object.
 # dateObject = datetime.strptime(start_date, "%B %d, %Y")
 # print(dateObject.date())
