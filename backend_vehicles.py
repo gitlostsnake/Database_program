@@ -7,7 +7,8 @@ def connect():
     cur.execute("""
                 CREATE TABLE IF NOT EXISTS TMvehicles
                 (id INTEGER PRIMARY KEY, FleetNo TEXT,
-                RegistrationNo TEXT, WeightLimit TEXT)
+                RegistrationNo TEXT, WeightLimit TEXT,
+                jobIdDay INTERGER, jobIdNight INTERGER)
                 """)
     conn.commit()
     conn.close()
