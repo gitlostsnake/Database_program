@@ -1,6 +1,8 @@
 import sqlite3
 import time
 from datetime import datetime
+import backend_inventory
+import backend_vehicles
 
 # date_format = '%Y-%m-%d %H:%M'
 
@@ -20,7 +22,21 @@ def connect():
     conn.commit()
     conn.close()
 
+# ~Not Complete~
+def assigned():
+    conn = sqlite3.connect("road_works.db")
+    cur = conn.cursor()
+    cur.execute("""CREATE TABLE IF NOT EXISTS assigned_to(?,?)""")
 
+
+def assign_vehicle():
+    conn = sqlite3.connect("road_works.db")
+    cur = conn.cursor()
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS assigned_vehicles(?, ?)
+                """,
+                ())
+# ~Not Complete~
 # Add new roadworks + changes date strings into datetime objects
 
 
