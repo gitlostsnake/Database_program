@@ -53,6 +53,13 @@ def get_selected_item(event):
     return selected_item
 
 
+def get_selected_vehicle(event):
+    global selected_vehicle
+    index = VehicleList.curselection()[0]
+    selected_vehicle = VehicleList.get(index)
+    return selected_vehicle
+
+
 # FUNCTIONS for buttons
 def view_roadworks():
     # Deleting from index 0 to the end so we don't duplicate items on display
@@ -251,6 +258,8 @@ stocklist.bind('<<ListboxSelect>>', get_selected_item)
 #   4d. MAIN BOX FOR VEHICLES
 VehicleList = Listbox(window, height=5, width=70)
 VehicleList.grid(row=41, column=1, rowspan=15, columnspan=15)
+
+VehicleList.bind('<<ListboxSelect>>', get_selected_vehicle)
 
 #   5a. DATA AND ENTRY BOXES
 # data entry to use add roadworks using labels instead of buttons
