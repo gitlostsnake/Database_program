@@ -13,11 +13,11 @@ def connect():
     conn.close()
 
 
-def insert(FleetNo, RegistrationNo, WeightLimit):
+def insert(fleet_no, registration_no, weight_limit):
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
     cur.execute("INSERT INTO TMvehicles VALUES (NULL, ?,?,?)",
-                (FleetNo, RegistrationNo, WeightLimit))
+                (fleet_no, registration_no, weight_limit))
     conn.commit()
     conn.close()
 
@@ -39,21 +39,30 @@ def delete(id):
     conn.close()
 
 
-def update(id, FleetNo, RegistrationNo, WeightLimit):
+def update(id, fleet_no, registration_no, weight_limit):
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
     cur.execute("""
-                UPDATE TMvehicles SET FleetNo=?, RegistrationNo=?,
-                WeightLimit=? WHERE id=?""",
-                (FleetNo, RegistrationNo, WeightLimit, id))
+                UPDATE TMvehicles SET fleet_no=?, registration_no=?,
+                weight_limit=? WHERE id=?""",
+                (fleet_no, registration_no, weight_limit, id))
     conn.commit()
     conn.close()
 
 
-def vieweverything():
+def view_everything():
     conn = sqlite3.connect("road_works.db")
     cur = conn.cursor()
     cur.execute('SELECT * FROM TMvehicles')
     [print(row) for row in cur.fetchall()]
 
+
 connect()
+
+# insert("TM560", "LX63 ZFK", "3.5T")
+# insert("TM561", "LF63 ZFK", "3.5T")
+# insert("TM562", "LX64 ZFK", "3.5T")
+# insert("TM563", "LX65 ZFK", "3.5T")
+# insert("TM564", "LX66 ZFK", "3.5T")
+# insert("TM565", "LX67 ZFK", "3.5T")
+# insert("TM566", "LX68 ZFK", "3.5T")
