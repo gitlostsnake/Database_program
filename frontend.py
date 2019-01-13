@@ -5,8 +5,6 @@ import backend_vehicles
 from tkinter import messagebox
 
 
-# This is my first program and I look forward to your feedback.
-
 # CONTENTS
 # 1. RoadWorks functions
 # 2a. Stock Buttons with commands
@@ -108,8 +106,6 @@ def add_to_roadworks():
     backend_roadworks.insert(Location_Text.get(), Client_Text.get(),
                              Start_Date_Text.get(), End_Date_Text.get())
     list1.delete(0, END)
-    # list1.insert(END, (Location_Text.get(), Client_Text.get(),
-    #                         Start_Date_Text.get(), End_Date_Text.get()))
     for row in backend_roadworks.view():
         list1.insert(END, row)
 
@@ -244,8 +240,8 @@ Stock_list_label.grid(row=22, column=2)
 stocklist = Listbox(window, height=5, width=70)
 stocklist.grid(row=23, column=1, rowspan=15, columnspan=15)
 
-CREATED_By_Jesus = Label(window, text="+")
-CREATED_By_Jesus.grid(row=40, column=0)
+spacer_label = Label(window, text="")
+spacer_label.grid(row=40, column=0)
 
 sb2 = Scrollbar(window)
 # sb2.grid(row=25, column=16, rowspan=4)
@@ -261,11 +257,18 @@ VehicleList.grid(row=41, column=1, rowspan=15, columnspan=15)
 
 VehicleList.bind('<<ListboxSelect>>', get_selected_vehicle)
 
+#   4e. MAIN BOX FOR PERSONEL
+# personel_label = Label(window, text="Personel")
+# personel_label.grid(row=25, column=18)
+
+# personel_list = Listbox(window, height=12, width=30)
+# personel_list.grid(row=26, column=18, rowspan=15, columnspan=7)
+
 #   5a. DATA AND ENTRY BOXES
 # data entry to use add roadworks using labels instead of buttons
 # so we can rig all of them up to the "Add to database" button
 HEYlisten_ADD = Label(window, text="""
-                        Fill in the fields, press CREATE for a new entry""")
+                        Fill in the fields, press Create for a new entry""")
 HEYlisten_ADD.grid(row=16, column=0, columnspan=4)
 
 Location_Text = StringVar()
@@ -300,6 +303,10 @@ End_Date_Entry.grid(row=18, column=3)
 hey_listen = Label(window, text="""
                            Or press the Update button to change info""")
 hey_listen.grid(row=19, column=0, columnspan=4)
+
+Help_Button = Button(window, text="Need help?", width=14,
+                     command=message2_user)
+Help_Button.grid(row=57, column=19)
 
 # STOCK ENTRY
 ITEM_Name_Text = StringVar()
@@ -339,15 +346,52 @@ ITEM_Warning_Entry.grid(row=21, column=3)
 # Additional_Data = Label(window, text="ADDITIONAL DATA")
 # Additional_Data.grid(row = 20, column = 2)
 
-Help_Button = Button(window, text="Need help?", width=14,
-                     command=message2_user)
-Help_Button.grid(row=19, column=0)
 
+Additional_data_label = Label(window, text="Additional\nData")
+Additional_data_label.grid(row=16, column=19)
+
+km_text = StringVar()
+km_label= Label(window, text="Km")
+km_label.grid(row=17, column=18)
+km_entry = Entry(window, textvariable=km_text)
+km_entry.grid(row=17, column=19)
+
+
+job_type_label = Label(window, text="Type")
+job_type_label.grid(row=18, column=18)
+
+job_type_choices = {'Temporary', 'Static', 'Traffic Control', 'Other'}
+job_type = StringVar()
+job_type.set('Temporary')
+job_choice_popup = OptionMenu(window, job_type, *job_type_choices)
+job_choice_popup.grid(row=18, column=19)
+
+# job_type_entry = Entry(window, textvariable=job_type_text)
+# job_type_entry.grid(row=18, column=19)
+
+
+crew_text = StringVar()
+crew_label= Label(window, text="Crew Size")
+crew_label.grid(row=19, column=18)
+crew_entry = Entry(window, textvariable=crew_text)
+crew_entry.grid(row=19, column=19)
+
+
+update_additonal_button = Button(window, text="Update Additional",
+                                width=14)
+update_additonal_button.grid(row=20, column=19)
 # Length_KM = Label(window, text="Length(km)")
 # Length_KM.grid(row = 21, column = 0)
 
 # Traffic_lights_required = Label(window, text="Traffic lights?")
 # Traffic_lights_required.grid(row = 21, column = 2)
 
+created_by_label = Label(window, text="+")
+created_by_label.grid(row=57, column = 0)
+
+
+view_roadworks()
+view_inventory()
+view_vehicles()
 
 window.mainloop()
